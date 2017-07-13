@@ -1,7 +1,5 @@
 package be.securex.sss.dimonaconverterservice.xsd.v4.hronline;
 
-import be.securex.sss.dimonaconverterservice.service.RemoveSelfClosingIT0100TagsService;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -17,7 +15,7 @@ public class HireList implements Serializable {
 
     private List<String> hires = new ArrayList<>();
 
-    public void add(Employee employee, RemoveSelfClosingIT0100TagsService removeSelfClosingIT0100TagsService) throws JAXBException {
+    public void add(Employee employee) throws JAXBException {
         JAXBContext jaxbContext = JAXBContext.newInstance(Employee.class);
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
         final StringWriter stringWriter = new StringWriter();
@@ -25,7 +23,6 @@ public class HireList implements Serializable {
         jaxbMarshaller.marshal(employee, stringWriter);
 
         String employeeXml = stringWriter.toString();
-        employeeXml = removeSelfClosingIT0100TagsService.perform(employeeXml);
         hires.add(employeeXml);
     }
 

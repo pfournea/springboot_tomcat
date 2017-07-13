@@ -1,6 +1,6 @@
 server:
   sessionTimeout: 1800
-  contextPath: /sssservices/${spring.application.name}
+  contextPath: /${spring.application.name}
 
 eureka:
   client:
