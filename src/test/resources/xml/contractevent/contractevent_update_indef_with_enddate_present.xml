@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ContractEvent xmlns="http://www.securex.be/contractevent/v1">
+    <metaData>
+        <sender>hireApp.clients@securex.be</sender>
+        <fupMessageInstanceId>10644160</fupMessageInstanceId>
+        <creationTimestamp>2016-04-01T16:32:14.000</creationTimestamp>
+    </metaData>
+    <updateContract>
+        <employeeInfo>
+            <title>DEHEER</title>
+            <firstName>FFJC</firstName>
+            <lastName>FBXS</lastName>
+            <gender xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">MALE</gender>
+            <birthDate>1991-03-02</birthDate>
+            <birthCountry>002</birthCountry>
+            <birthPlace>Ddgh</birthPlace>
+            <nationality>002</nationality>
+            <address>
+                <street>Test 1</street>
+                <houseNumber>1</houseNumber>
+                <zip>2440</zip>
+                <city>GEEL</city>
+                <countryCode>000</countryCode>
+            </address>
+        </employeeInfo>
+        <originalEmployeeInfo>
+            <title>DEHEER</title>
+            <firstName>FFJC</firstName>
+            <lastName>FBXS</lastName>
+            <gender xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">MALE</gender>
+            <birthDate>1991-03-02</birthDate>
+            <birthCountry>002</birthCountry>
+            <birthPlace>Ddgh</birthPlace>
+            <nationality>002</nationality>
+            <address>
+                <street>Test 1</street>
+                <houseNumber>1</houseNumber>
+                <zip>2440</zip>
+                <city>GEEL</city>
+                <countryCode>000</countryCode>
+            </address>
+        </originalEmployeeInfo>
+        <contractInfo>
+            <FDCP>
+                <firmNumber>0000020249</firmNumber>
+            </FDCP>
+            <contract>
+                <indefiniteTerm>
+                    <startDate>2016-03-24</startDate>
+                    <endDate>2016-05-01</endDate>
+                </indefiniteTerm>
+            </contract>
+            <paritairComite>302000</paritairComite>
+            <employeeStatute>employee</employeeStatute>
+        </contractInfo>
+        <originalContractInfo>
+            <FDCP>
+                <firmNumber>0000020249</firmNumber>
+            </FDCP>
+            <contract>
+                <indefiniteTerm>
+                    <startDate>2016-03-24</startDate>
+                    <endDate>2016-04-21</endDate>
+                </indefiniteTerm>
+            </contract>
+            <paritairComite>302000</paritairComite>
+            <employeeStatute>employee</employeeStatute>
+        </originalContractInfo>
+        <contractIdentifier>
+            <contractId>9001099</contractId>
+            <contractUuid>dac1339e-cd62-46a1-988c-729b16cbd2c7</contractUuid>
+        </contractIdentifier>
+    </updateContract>
+</ContractEvent>

@@ -1,0 +1,77 @@
+buildscript {
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.4.RELEASE")
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+}
+apply plugin: 'spring-boot'
+apply plugin: 'war'
+apply plugin: 'idea'
+apply plugin: 'groovy'
+apply from: './dependencies.gradle'
+
+group = 'be.securex.dimonaconverterservice'
+version = '1.0.0'
+
+jar.enabled = false
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+tasks.withType(org.springframework.boot.gradle.run.BootRunTask) {
+
+    systemProperty('spring.profiles.active', 'dev')
+    systemProperty('server.port', '8083')
+    systemProperty('appenders', 'Console,RollingFile')
+    systemProperty('logDir', 'C:/DEVELOPMENT/logs')
+    systemProperty('logFileName', 'dimonaconverterservice')
+//    uncomment the lines below if you want to startup the application with tst profile + set spring.cloud.config.enabled on true
+//    systemProperty('configServiceUsername', 'configserverclient')
+//    systemProperty('configServicePassword', 'securex1')
+//    systemProperty('configServiceUrl', 'http://s40jasstst01:6499/genservices/configservice')
+    systemProperty('spring.cloud.config.enabled', 'false')
+}
+
+//performance issue with tomcat vesrion 8.5.15 (loading the jaxbcontext) maybe related to https://github.com/spring-projects/spring-boot/issues/9670
+ext['tomcat.version'] = '8.0.32'
+
+dependencies {
+    libs.spring_boot.each({
+        compile it
+    }
+    )
+    libs.jaxb.each( {
+        compile it
+    })
+    libs.springfox_swagger.each({
+        compile it
+    })
+    compile libs.groovy
+    compile libs.commonsLang3
+    libs.jackson.each({
+        compile it
+    })
+    libs.spring_cloud.each({
+        compile it
+    })
+    compile libs.guava
+    compile libs.jolokia
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile group:'org.apache.tomcat', name:'tomcat-juli', version:property('tomcat.version')
+    libs.test.each({
+        testCompile it
+    })
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Dalston.SR1"
+    }
+}

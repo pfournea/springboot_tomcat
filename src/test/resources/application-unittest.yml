@@ -1,0 +1,36 @@
+server:
+  sessionTimeout: 1800
+  contextPath: /sssservices/${spring.application.name}
+
+spring:
+  profiles: unittest
+  cloud:
+    config:
+      enabled: false
+#  profiles.include: devdb2
+#  datasource:
+#     name: inmemory
+##     initialize=true # populate using data-h2.sql
+##     schema: # a schema (DDL) script resource reference
+#     platform: h2
+#     url: jdbc:h2:mem:mydb
+#     username: sa
+#     password:
+##     spring.datasource.jndi-name= # For JNDI lookup (class, url, username & password are ignored when set)
+
+  datasource:
+     name: LNXDEV0
+     driverClassName: com.ibm.db2.jcc.DB2Driver
+     url: jdbc:db2://zlinuxdev:50001/LNXDEV0
+     username: wlsdev1
+     password: wlsdevpw
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/genservices/eurekaservice/eureka/
+    enabled: false #place this in comment if you want to use the local eureka service
+  instance:
+    homePageUrlPath: ${server.contextPath}
+    statusPageUrlPath: ${server.contextPath}/info
+    healthCheckUrlPath: ${server.contextPath}/health

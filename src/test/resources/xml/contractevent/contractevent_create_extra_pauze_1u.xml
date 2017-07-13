@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ContractEvent xmlns="http://www.securex.be/contractevent/v1">
+    <metaData>
+        <sender>hireApp.clients@securex.be</sender>
+        <fupMessageInstanceId>29111693</fupMessageInstanceId>
+        <creationTimestamp>2016-09-16T13:41:08.000</creationTimestamp>
+    </metaData>
+    <newContract>
+        <employeeInfo>
+            <title>DEHEER</title>
+            <firstName>Peter</firstName>
+            <lastName>Selis</lastName>
+            <gender xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string">MALE</gender>
+            <birthDate>1973-04-28</birthDate>
+            <birthCountry>000</birthCountry>
+            <nationality>000</nationality>
+            <registerNumber>73042800141</registerNumber>
+        </employeeInfo>
+        <contractInfo>
+            <FDCP>
+                <firmNumber>0000020249</firmNumber>
+            </FDCP>
+            <contract>
+                <xtra>
+                    <date>2016-09-16</date>
+                    <workHours>
+                        <startDate>2016-09-16</startDate>
+                        <startTime>14:00:00</startTime>
+                        <endDate>2016-09-16</endDate>
+                        <endTime>22:00:00</endTime>
+                        <break>P0Y0M0DT0H60M0S</break>
+                    </workHours>
+                </xtra>
+            </contract>
+            <paritairComite>302000</paritairComite>
+            <employeeStatute>worker</employeeStatute>
+        </contractInfo>
+        <contractUuid>b509ac0a-1916-4100-9008-c468b6c040da</contractUuid>
+    </newContract>
+</ContractEvent>

@@ -1,0 +1,29 @@
+def groovyVersion = "2.4.1"
+def commonsLang3Version = '3.4'
+def guavaVersion = '18.0'
+def jaxbVersion = '2.2.11'
+def jaxbApiVersion = '2.2.12'
+def springfoxSwaggerVersion = '2.3.1'
+def jolokiaVersion = '1.3.2'
+
+ext.libs = [
+        spring_boot : ["org.springframework.boot:spring-boot-starter-web"],
+        springfox_swagger : ["io.springfox:springfox-swagger2:$springfoxSwaggerVersion",
+                             "io.springfox:springfox-swagger-ui:$springfoxSwaggerVersion"],
+        spring_cloud : ["org.springframework.cloud:spring-cloud-starter-sleuth",
+                        "org.springframework.cloud:spring-cloud-starter-config",
+                        "org.springframework.cloud:spring-cloud-starter-eureka"],
+        groovy      : "org.codehaus.groovy:groovy-all:$groovyVersion",
+        commonsLang3: "org.apache.commons:commons-lang3:$commonsLang3Version",
+        jackson     : [ "com.fasterxml.jackson.datatype:jackson-datatype-jsr310",
+                        "com.fasterxml.jackson.core:jackson-databind"],
+        guava       : "com.google.guava:guava:$guavaVersion",
+        jolokia     : "org.jolokia:jolokia-core:$jolokiaVersion",
+        jaxb        : ["javax.xml.bind:jaxb-api:$jaxbApiVersion",
+                        "com.sun.xml.bind:jaxb-impl:$jaxbVersion",
+                        "com.sun.xml.bind:jaxb-xjc:$jaxbVersion",
+                        "com.sun.xml.bind:jaxb-core:$jaxbVersion"],
+        test        : ["org.spockframework:spock-core",
+                       "org.spockframework:spock-spring",
+                       "org.springframework.boot:spring-boot-starter-test"]
+]

@@ -1,0 +1,13 @@
+server:
+  sessionTimeout: 1800
+  contextPath: /sssservices/${spring.application.name}
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/genservices/eurekaservice/eureka/
+    enabled: false #place this in comment if you want to use the local eureka service
+  instance:
+    homePageUrlPath: ${server.contextPath}
+    statusPageUrlPath: ${server.contextPath}/info
+    healthCheckUrlPath: ${server.contextPath}/health

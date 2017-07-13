@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 sp1 (http://www.altova.com) by Securex (Securex Rekencentrum Gent) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.securex.be/contractevent/v1" targetNamespace="http://www.securex.be/contractevent/v1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="ContractEvent">
+		<xs:annotation>
+			<xs:documentation>Comment describing your root element</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="metaData" type="tns:MetaDataType"/>
+				<xs:choice>
+					<xs:element name="newContract">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="tns:NewContractType"/>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="updateContract" type="tns:UpdateContractType"/>
+					<xs:element name="cancelContract" type="tns:CancelContractType"/>
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="MetaDataType">
+		<xs:sequence>
+			<xs:element name="sender" type="xs:string"/>
+			<xs:element name="fupMessageInstanceId" type="xs:string" minOccurs="0"/>
+			<xs:element name="creationTimestamp" type="xs:dateTime"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreationAddressType">
+        <xs:sequence>
+            <xs:element name="street" type="xs:string"/>
+            <xs:element name="houseNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="boxNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="complement" type="xs:string" minOccurs="0"/>
+            <xs:element name="zip" type="xs:string"/>
+            <xs:element name="city" type="xs:string" minOccurs="0"/>
+            <xs:element name="countryCode" type="tns:CountryCodeType"/>
+        </xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ModificationAddressType">
+        <xs:sequence>
+            <xs:element name="street" type="xs:string"/>
+            <xs:element name="houseNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="boxNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="complement" type="xs:string" minOccurs="0"/>
+            <xs:element name="zip" type="xs:string" minOccurs="0"/>
+            <xs:element name="city" type="xs:string" minOccurs="0"/>
+            <xs:element name="countryCode" type="tns:CountryCodeType"/>
+        </xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EmployeeInfoType" abstract="true">
+		<xs:sequence>
+			<xs:element name="title" type="xs:string"/>
+			<xs:element name="firstName" type="xs:string"/>
+			<xs:element name="lastName" type="xs:string"/>
+			<xs:element name="secondNameInitial" type="xs:string" minOccurs="0"/>
+			<xs:element name="gender"/>
+			<xs:element name="birthDate" type="xs:date"/>
+			<xs:element name="birthCountry" type="tns:CountryCodeType" minOccurs="0"/>
+			<xs:element name="birthPlace" type="xs:string" minOccurs="0"/>
+			<xs:element name="nationality" type="tns:CountryCodeType"/>
+			<xs:element name="registerNumber" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="(\d{11}|\d{8}|\d{7})?"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreationEmployeeInfoType">
+		<xs:complexContent>
+			<xs:extension base="tns:EmployeeInfoType">
+				<xs:sequence>
+					<xs:element name="address" type="tns:CreationAddressType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ModificationEmployeeInfoType">
+		<xs:complexContent>
+			<xs:extension base="tns:EmployeeInfoType">
+				<xs:sequence>
+					<xs:element name="address" type="tns:ModificationAddressType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="CountryCodeType">
+		<xs:restriction base="xs:string">
+			<xs:length value="3"/>
+			<xs:pattern value="(\d{3})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ContractInfoType">
+		<xs:sequence>
+			<xs:element name="FDCP" type="tns:FDCPType"/>
+			<xs:element name="contract" type="tns:ContractType"/>
+			<xs:element name="paritairComite" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="6"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="employeeStatute" type="tns:EmployeeStatuteType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ContractIdentifierType">
+		<xs:sequence>
+			<xs:choice minOccurs="1" maxOccurs="unbounded">
+				<xs:element name="contractId" type="tns:ContractIdType"/>
+				<xs:element name="contractUuid" type="tns:ContractUuidType"/>
+				<xs:element name="sapPerNr" type="tns:SapPerNrType"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="XtraType">
+		<xs:sequence>
+			<xs:element name="date" type="xs:date"/>
+			<xs:element name="workHours" type="tns:WorkHoursType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WorkHoursType">
+		<xs:sequence>
+			<xs:element name="startDate" type="xs:date"/>
+			<xs:element name="startTime" type="xs:time"/>
+			<xs:element name="endDate" type="xs:date"/>
+			<xs:element name="endTime" type="xs:time"/>
+			<xs:element name="break" type="xs:duration"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FlexiDayType">
+		<xs:sequence>
+			<xs:element name="date" type="xs:date"/>
+			<xs:element name="workHours" type="tns:WorkHoursType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FlexiPeriodType">
+		<xs:sequence>
+			<xs:element name="startDate" type="xs:date"/>
+			<xs:element name="endDate" type="xs:date"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StudentType">
+		<xs:sequence>
+			<xs:element name="startDate" type="xs:date"/>
+			<xs:element name="endDate" type="xs:date"/>
+			<xs:choice>
+				<xs:element name="numberOfDays" type="xs:int"/>
+				<xs:element name="numberOfHours" type="xs:int"/>
+			</xs:choice>
+			<xs:element name="FAONumber">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="\d{0,4}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DefiniteTermType">
+		<xs:sequence>
+			<xs:element name="startDate" type="xs:date"/>
+			<xs:element name="endDate" type="xs:date"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="IndefiniteTermType">
+		<xs:sequence>
+			<xs:element name="startDate" type="xs:date"/>
+			<xs:element name="endDate" type="xs:date" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FDCPType">
+		<xs:sequence>
+			<xs:element name="firmNumber">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="\d{0,10}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="departmentNumber" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="\d{0,2}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="category" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="\d{0,1}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="personNumber" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="\d{0,10}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="EmployeeStatuteType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="worker"/>
+			<xs:enumeration value="employee"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ContractType">
+		<xs:choice>
+			<xs:element name="flexiDay" type="tns:FlexiDayType"/>
+			<xs:element name="flexiPeriod" type="tns:FlexiPeriodType"/>
+			<xs:element name="xtra" type="tns:XtraType"/>
+			<xs:element name="student" type="tns:StudentType"/>
+			<xs:element name="definiteTerm" type="tns:DefiniteTermType"/>
+			<xs:element name="indefiniteTerm" type="tns:IndefiniteTermType"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="ContractEventType">
+		<xs:choice>
+			<xs:element name="hire"/>
+			<xs:element name="update"/>
+			<xs:element name="fire"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="NewContractType">
+		<xs:sequence>
+			<xs:element name="employeeInfo" type="tns:CreationEmployeeInfoType"/>
+			<xs:element name="contractInfo" type="tns:ContractInfoType"/>
+			<xs:element name="contractUuid" type="tns:ContractUuidType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UpdateContractType">
+		<xs:sequence>
+			<xs:element name="employeeInfo" type="tns:ModificationEmployeeInfoType"/>
+			<xs:element name="originalEmployeeInfo" type="tns:ModificationEmployeeInfoType"/>
+			<xs:element name="contractInfo" type="tns:ContractInfoType"/>
+			<xs:element name="originalContractInfo" type="tns:ContractInfoType"/>
+			<xs:element name="contractIdentifier" type="tns:ContractIdentifierType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CancelContractType">
+		<xs:sequence>
+			<xs:element name="employeeInfo" type="tns:ModificationEmployeeInfoType"/>
+			<xs:element name="originalEmployeeInfo" type="tns:ModificationEmployeeInfoType"/>
+			<xs:element name="contractInfo" type="tns:ContractInfoType"/>
+			<xs:element name="originalContractInfo" type="tns:ContractInfoType"/>
+			<xs:element name="contractIdentifier" type="tns:ContractIdentifierType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ContractIdType">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="ContractUuidType">
+		<xs:restriction base="xs:string">
+			<xs:length value="36"/>
+			<xs:pattern value="[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SapPerNrType">
+		<xs:restriction base="xs:string">
+			<xs:length value="8"/>
+			<xs:pattern value="[0-9]{8}"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

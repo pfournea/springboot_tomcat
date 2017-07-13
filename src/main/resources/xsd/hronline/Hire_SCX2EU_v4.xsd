@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2017 (x64) (http://www.altova.com) by Securex (Securex Rekencentrum Gent) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="Employee">
+		<xs:annotation>
+			<xs:documentation>ROOT</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ScenarioInfo" type="ScenarioInfoCType" maxOccurs="1"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="KeyInfoCType">
+		<xs:annotation>
+			<xs:documentation>complextype keyinfo</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="UpdateUser">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="UpdateTimestamp" type="xs:dateTime"/>
+			<xs:element name="Firm" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Firm</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="[0-9]{10}"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Id" minOccurs="1" maxOccurs="1">
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="UUID" type="UUIDType">
+							<xs:annotation>
+								<xs:documentation>unique identifier for a contract</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="PerNr" type="PerNrType">
+							<xs:annotation>
+								<xs:documentation>SAP Eemployee number</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="CompositeId">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="UUID" type="UUIDType">
+										<xs:annotation>
+											<xs:documentation>unique identifier for a contract</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="PerNr" type="PerNrType">
+										<xs:annotation>
+											<xs:documentation>SAP Eemployee number</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ScenarioInfoCType">
+		<xs:annotation>
+			<xs:documentation>Scenario to be executed</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="KeyInfo" type="KeyInfoCType"/>
+			<xs:element name="ScenarioInfoContent" type="ScenarioInfoContentCType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="HireCType">
+		<xs:annotation>
+			<xs:documentation>Mini hire</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="IT0000" minOccurs="1" maxOccurs="1">
+				<xs:complexType>
+					<xs:annotation>
+						<xs:documentation>Action data</xs:documentation>
+					</xs:annotation>
+					<xs:sequence>
+						<xs:element name="ContractStartDate" type="xs:date" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="ContractEndDate" type="xs:date" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="IT0001" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Organizational data</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="EmployeeGroup" type="StringPattern1Char" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="EmployeeSubgroup" type="StringPattern2Chars" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="WorkContract" type="StringPattern2Chars" minOccurs="1" maxOccurs="1"/>
+						<xs:element name="Departement" type="StringPattern4Chars" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="IT0002" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Personal data</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Title" type="StringPattern1Char" minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>Aanspreek-code</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="FirstName" minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>voornaam</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:pattern value=".{0,30}"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="LastName" minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>familienaam</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:pattern value=".{0,40}"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="Initials" minOccurs="0" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>Initiaal2deVoornaam</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:pattern value="([A-Z]|[a-z])?"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="Gender" minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>geslacht code</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:pattern value="1|2"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="BirthDate" type="xs:date" minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>geboortedatum</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="BirthPlace" minOccurs="0" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>geboorteplaatsnaam</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:pattern value=".{0,50}"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="CountryOfBirth" type="SecurexCountryCode" minOccurs="0" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>geboorteland</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Nationality" type="SecurexCountryCode" minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>nationaliteit</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="IT0100" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>INSS Number</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="INSSNumber" minOccurs="0" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>Rijksregisternr of nationaal nr of BISnummer</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:pattern value="([0-9]{11})?"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="IT0016" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Contract data</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ContractType" type="StringPattern2Chars" minOccurs="1" maxOccurs="1"/>
+						<!--  					   value list? -->
+						<xs:element name="LabourCommission" minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>bevoegd paritair comité</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:pattern value=".{0,3}"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="IT0109" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Only PC building (PC 124)</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="C32ACardNbrCurrentMonth" minOccurs="1" maxOccurs="1">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:pattern value="([0-9]{12})?"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="C32ACardNbrNextMonth" minOccurs="1" maxOccurs="1">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:pattern value="([0-9]{12})?"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="IT0006" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Adress data</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Street" type="StringPattern40Chars" minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>straat_naam</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="HouseNumber" type="StringPattern10Chars" minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>huis_nr</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="MailBoxNumber" minOccurs="0" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>bus_nr</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:pattern value=".{0,10}"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="SecondAddressLine" type="StringPattern40Chars" minOccurs="0" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>extra_info_txt zoals gebouw, verdieping,...</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="PostalCode" type="StringPattern10Chars" minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>post_code</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="City" type="StringPattern40Chars" minOccurs="0" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>gemeente_desc</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Country" type="SecurexCountryCode" minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>SecurexCountryCode/land_code</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="IT2003" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Workschedule: only for occasional worker/Flexi 1 day/extra</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="validFrom" type="xs:date" minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>startdate</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="validTo" type="xs:date" minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>enddate</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="startTime" type="xs:time" minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>startuur</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="endTime" type="xs:time" minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>Einduur</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="break" type="StringPatternAmount4_2_No_Sign" minOccurs="0" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>Break expressed in decimal hours</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="endTimeOnNextDay" type="xs:boolean"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="IT0007" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Only for Extra</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="CONTINGENT" type="StringPattern2Chars" minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>Contingent</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="IT9753" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Only for Students</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="EmploymentAddressRefNumber" type="StringPatternRefNumber" minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>Volgnr FAD</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GIT0016" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Only for students</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="Planneddaysnbr" type="StringPatternNumber99" minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>Nbr.of planned days</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Plannedhoursnbr" type="StringPatternNumber999" minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>Nbr.of planned hours</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AnnulationCType">
+		<xs:annotation>
+			<xs:documentation>Annulation MH or FH</xs:documentation>
+		</xs:annotation>
+	</xs:complexType>
+	<xs:complexType name="TerminationCType">
+		<xs:annotation>
+			<xs:documentation>Termination </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="IT0000" minOccurs="1" maxOccurs="1">
+				<xs:complexType>
+					<xs:annotation>
+						<xs:documentation>Fields for IT0000</xs:documentation>
+					</xs:annotation>
+					<xs:sequence>
+						<xs:element name="ContractEndDate" type="xs:date" minOccurs="1" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ChangeStudentCType">
+		<xs:annotation>
+			<xs:documentation>Dimona change student</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="IT9753" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Only for Students</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="EmploymentAddressRefNumber" type="StringPatternRefNumber" minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>Volgnr FAD</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GIT0016" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Only for students</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="Planneddaysnbr" type="StringPatternNumber99" minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>Nbr.of planned days</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Plannedhoursnbr" type="StringPatternNumber999" minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>Nbr.of planned hours</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ChangeExtraFlexiCType">
+		<xs:annotation>
+			<xs:documentation>only for occasional worker/Flexi 1 day/extra</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="IT2003" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Fields for IT2003</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="validFrom" type="xs:date" minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>startdate</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="validTo" type="xs:date" minOccurs="1" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>enddate</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="startTime" type="xs:time">
+							<xs:annotation>
+								<xs:documentation>startuur</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="endTime" type="xs:time">
+							<xs:annotation>
+								<xs:documentation>Einduur</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="break" type="StringPatternAmount4_2_No_Sign" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Break expressed in decimal hours</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="endTimeOnNextDay" type="xs:boolean"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ScenarioInfoContentCType">
+		<xs:choice>
+			<xs:element name="Hire" type="HireCType"/>
+			<xs:element name="Termination" type="TerminationCType"/>
+			<xs:element name="Annulation" type="AnnulationCType"/>
+			<xs:element name="DeleteTermination" type="DeleteTerminationCType"/>
+			<xs:element name="ChangeStudent" type="ChangeStudentCType"/>
+			<xs:element name="ChangeExtraFlexi" type="ChangeExtraFlexiCType"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="DeleteTerminationCType"/>
+	<xs:simpleType name="SecurexCountryCode">
+		<xs:annotation>
+			<xs:documentation>type securex</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value=".{0,3}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StringPatternAmount4_2">
+		<xs:annotation>
+			<xs:documentation>2 decimals (max. 4 digits)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[\-+]?[0-9]{0,2}(,[0-9]{1,2})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StringPatternAmount4_2_No_Sign">
+		<xs:annotation>
+			<xs:documentation>2 decimals (max. 4 digits)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{0,2}(,[0-9]{0,2})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StringPatternNumber99">
+		<xs:annotation>
+			<xs:documentation>2 numeric positions</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{0,2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StringPatternNumber999">
+		<xs:annotation>
+			<xs:documentation>3 numeric positions</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{0,3}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StringPattern1Char">
+		<xs:annotation>
+			<xs:documentation>1 alfanumeric character </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value=".{0,1}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StringPattern2Chars">
+		<xs:annotation>
+			<xs:documentation>2 alfanumeric characters</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value=".{0,2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StringPattern4Chars">
+		<xs:annotation>
+			<xs:documentation>4 alfanumeric characters</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value=".{0,4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StringPattern10Chars">
+		<xs:annotation>
+			<xs:documentation>max 10 alfanum. char</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value=".{0,10}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StringPattern40Chars">
+		<xs:annotation>
+			<xs:documentation>max. 40 alfanum. char</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value=".{0,40}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UUIDType">
+		<xs:restriction base="xs:string">
+			<xs:length value="36"/>
+			<xs:pattern value="[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StringPatternRefNumber">
+		<xs:annotation>
+			<xs:documentation>employer-data- referencenumber</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="([0-9]{0,4})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PerNrType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{8}"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

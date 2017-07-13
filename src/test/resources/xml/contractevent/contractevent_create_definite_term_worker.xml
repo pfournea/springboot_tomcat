@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ContractEvent xmlns="http://www.securex.be/contractevent/v1">
+    <metaData>
+        <sender>hire-app</sender>
+        <fupMessageInstanceId>-1</fupMessageInstanceId>
+        <creationTimestamp>2015-01-30T10:10:00.000</creationTimestamp>
+    </metaData>
+    <newContract>
+        <employeeInfo>
+            <title>DEHEER</title>
+            <firstName>firstname</firstName>
+            <lastName>lastname</lastName>
+            <gender xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                    xsi:type="xs:string">MALE</gender>
+            <birthDate>2015-10-16</birthDate>
+            <birthCountry>000</birthCountry>
+            <nationality>000</nationality>
+            <registerNumber>00010100105</registerNumber>
+        </employeeInfo>
+        <contractInfo>
+            <FDCP>
+                <firmNumber>123</firmNumber>
+                <departmentNumber></departmentNumber>
+                <category></category>
+            </FDCP>
+            <contract>
+                <definiteTerm>
+                    <startDate>2016-01-01</startDate>
+                    <endDate>2016-01-31</endDate>
+                </definiteTerm>
+            </contract>
+            <paritairComite>218</paritairComite>
+            <employeeStatute>worker</employeeStatute>
+        </contractInfo>
+        <contractUuid>534d9621-3b3d-4d46-b74b-388011872b43</contractUuid>
+    </newContract>
+</ContractEvent>
