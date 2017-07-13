@@ -26,17 +26,8 @@ repositories {
 }
 
 tasks.withType(org.springframework.boot.gradle.run.BootRunTask) {
-
     systemProperty('spring.profiles.active', 'dev')
     systemProperty('server.port', '8083')
-    systemProperty('appenders', 'Console,RollingFile')
-    systemProperty('logDir', 'C:/DEVELOPMENT/logs')
-    systemProperty('logFileName', 'dimonaconverterservice')
-//    uncomment the lines below if you want to startup the application with tst profile + set spring.cloud.config.enabled on true
-//    systemProperty('configServiceUsername', 'configserverclient')
-//    systemProperty('configServicePassword', 'securex1')
-//    systemProperty('configServiceUrl', 'http://s40jasstst01:6499/genservices/configservice')
-    systemProperty('spring.cloud.config.enabled', 'false')
 }
 
 //performance issue with tomcat vesrion 8.5.15 (loading the jaxbcontext) maybe related to https://github.com/spring-projects/spring-boot/issues/9670
